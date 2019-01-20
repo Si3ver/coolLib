@@ -1,7 +1,6 @@
 <template>
   <div class="todolist">
-    <h3>{{title}}</h3>
-    <h5>{{subTitle}}</h5>
+    <Title :title="title" :subtitle="subtitle" />
     <input type="text" v-model="mytodo" @keyup.enter="handleClick" />
     <button @click="handleClick">添加</button>
     <button @click="clean">清空</button>
@@ -20,12 +19,14 @@
 </template>
 
 <script>
+import Title from './Title'
+
 export default {
   name: 'Todolist',
   data () {
     return {
       title: 'Todolist',
-      subTitle: '一个简单的待办事项组件',
+      subtitle: '一个简单的待办事项组件',
       todos: [
         {text: '吃饭', done: false},
         {text: '睡觉', done: false},
@@ -38,6 +39,9 @@ export default {
     remains () {
       return this.todos.filter(v => !v.done).length
     }
+  },
+  components: {
+    Title
   },
   methods: {
     handleClick () {
